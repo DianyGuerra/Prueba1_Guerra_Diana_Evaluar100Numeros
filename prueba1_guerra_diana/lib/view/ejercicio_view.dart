@@ -75,7 +75,7 @@ class ResultText extends StatelessWidget {
       );
 }
 
-// Molécula
+// Atomo
 class NumeroInput extends StatelessWidget {
   final TextEditingController numeroC;
 
