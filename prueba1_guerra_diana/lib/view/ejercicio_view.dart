@@ -32,9 +32,10 @@ class NumberField extends StatelessWidget {
   Widget build(BuildContext context) => TextField(
         controller: controller,
         keyboardType: TextInputType.number,
-        decoration: const InputDecoration(
+        decoration: InputDecoration(
           labelText: 'Número natural',
-          border: OutlineInputBorder(),
+          hintText: hint,
+          border: const OutlineInputBorder(),
         ),
       );
 }
@@ -75,19 +76,33 @@ class ResultText extends StatelessWidget {
       );
 }
 
-// Atomo
+// Molécula
 class NumeroInput extends StatelessWidget {
   final TextEditingController numeroC;
+  final VoidCallback onAgregar;
 
   const NumeroInput({
     super.key,
     required this.numeroC,
+    required this.onAgregar,
   });
 
   @override
-  Widget build(BuildContext context) => NumberField(
-        controller: numeroC,
-        hint: 'Número natural',
+  Widget build(BuildContext context) => Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Label('Número natural'),
+          const SizedBox(height: 8),
+          NumberField(
+            controller: numeroC,
+            hint: 'Ingrese un número natural',
+          ),
+          const SizedBox(height: 15),
+          PrimaryButton(
+            text: 'Agregar número',
+            onPressed: onAgregar,
+          ),
+        ],
       );
 }
 
@@ -132,24 +147,16 @@ class _EjercicioCardState extends State<EjercicioCard> {
             const Label('Ingrese 100 números naturales'),
             const SizedBox(height: 20),
 
-            NumeroInput(numeroC: numeroC),
-
-            const SizedBox(height: 20),
-
-            PrimaryButton(
-              text: 'Agregar número',
-              onPressed: () {
-                agregarNumero();
-              },
+            NumeroInput(
+              numeroC: numeroC,
+              onAgregar: agregarNumero,
             ),
 
             const SizedBox(height: 10),
 
             PrimaryButton(
               text: 'Limpiar',
-              onPressed: () {
-                limpiarDatos();
-              },
+              onPressed: limpiarDatos,
             ),
 
             const SizedBox(height: 20),
